@@ -1,9 +1,10 @@
 # advance_image_picker
 
-Flutter plugin for selecting **multiple images** from the Android and iOS image library, **taking new pictures with the camera**, and **edit** them before using such as rotating, cropping, adding sticker/filters.
+Flutter plugin for selecting **multiple images** from the Android and iOS image library, **taking
+new pictures with the camera**, and **edit** them before using such as rotating, cropping, adding
+sticker/filters.
 
 *This is an advanced version of [image_picker](https://pub.dev/packages/image_picker) plugin.*
-
 
 ## Key Features
 
@@ -24,18 +25,24 @@ Flutter plugin for selecting **multiple images** from the Android and iOS image 
 
 **1. freemar.vn - Shopping app for Vietnamese**
 
-<a href="https://play.google.com/store/apps/details?id=com.freemar.vn" class="download-btn"><i class="bx bxl-play-store"></i> Google Play</a>
-<a href="https://apps.apple.com/vn/app/freemar/id1530667938?l=vi" class="download-btn"><i class="bx bxl-apple"></i> App Store</a>
+<a href="https://play.google.com/store/apps/details?id=com.freemar.vn" class="download-btn"><i class="bx bxl-play-store"></i>
+Google Play</a>
+<a href="https://apps.apple.com/vn/app/freemar/id1530667938?l=vi" class="download-btn"><i class="bx bxl-apple"></i>
+App Store</a>
 
 **2. trainghiem.vn - Find places to have fun, find places to experience!**
 
-<a target="_blank" data-animation="fadeInRight" data-delay="1.0s" href="https://play.google.com/store/apps/details?id=com.trainghiem.vn" class="btn" tabindex="0" style="animation-delay: 1s;">Google Play</a>
-<a target="_blank" data-animation="fadeInLeft" data-delay="1.0s" href="https://apps.apple.com/vn/app/trainghiemvn/id1537519143?l=vi" class="btn" tabindex="0" style="animation-delay: 1s;">App Store</a>
+<a target="_blank" data-animation="fadeInRight" data-delay="1.0s" href="https://play.google.com/store/apps/details?id=com.trainghiem.vn" class="btn" tabindex="0" style="animation-delay: 1s;">
+Google Play</a>
+<a target="_blank" data-animation="fadeInLeft" data-delay="1.0s" href="https://apps.apple.com/vn/app/trainghiemvn/id1537519143?l=vi" class="btn" tabindex="0" style="animation-delay: 1s;">
+App Store</a>
 
 **3. Henoo - Heritage in your pocket (Le patrimoine dans la poche)**
 
-<a href="https://play.google.com/apps/testing/fr.henoo.henooapp" class="download-btn"><i class="bx bxl-play-store"></i> Google Play</a>
-<a href="https://apps.apple.com/fr/app/henoo/id1550979414" class="download-btn"><i class="bx bxl-apple"></i> App Store</a>
+<a href="https://play.google.com/apps/testing/fr.henoo.henooapp" class="download-btn"><i class="bx bxl-play-store"></i>
+Google Play</a>
+<a href="https://apps.apple.com/fr/app/henoo/id1550979414" class="download-btn"><i class="bx bxl-apple"></i>
+App Store</a>
 
 ## Demo & Screenshots
 
@@ -45,10 +52,10 @@ Flutter plugin for selecting **multiple images** from the Android and iOS image 
  ---
 [*Youtube Demo Link*](https://youtu.be/pl0S72kd0mo)
 
-
 ## Installation
 
 ### Dart
+
 This plugin requires dart version 2.16.1 or later
 
 ### iOS
@@ -65,21 +72,24 @@ Add these settings to the ios/Runner/Info.plist
 ~~~~
 
 Modify TOCropViewController version in snapshot (ios/Podfile.lock) to 2.6.1
+
 ~~~~
 TOCropViewController (2.6.1)
 ~~~~
 
-
 ### Android
 
-Change the minimum Android sdk version to 21 (or higher), and compile sdk to 31 (or higher) in your `android/app/build.gradle` file (refer example project).
+Change the minimum Android sdk version to 21 (or higher), and compile sdk to 31 (or higher) in
+your `android/app/build.gradle` file (refer example project).
 
 ~~~~
 compileSdkVersion 31
 minSdkVersion 21
 ~~~~
 
-Change kotlin version to 1.5.21 or later in your `android/build.gradle` file (refer example project).
+Change kotlin version to 1.5.21 or later in your `android/build.gradle` file (refer example project)
+.
+
 ~~~~
 ext.kotlin_version = '1.5.21'
 ~~~~
@@ -178,7 +188,9 @@ configs.translateFunc = (name, value) => Intl.message(value, name: name); // Use
 ```
 
 Sample for adding external image editors.  
-(You can replace ImageEdit widget by your owned image editor widget, that output file after editing finised)
+(You can replace ImageEdit widget by your owned image editor widget, that output file after editing
+finised)
+
 ```
 configs.externalImageEditors['external_image_editor_1'] = EditorParams(
       title: 'external_image_editor_1',
@@ -195,7 +207,6 @@ configs.externalImageEditors['external_image_editor_1'] = EditorParams(
               builder: (context) => ImageEdit(file: file, title: title, maxWidth: maxWidth, maxHeight: maxHeight, configs: configs)))
   );
 ```
-
 
 Sample for usage
 
@@ -232,7 +243,8 @@ This software uses the following open source packages:
 
 ## Support
 
-If this plugin was useful to you, helped you to deliver your app, saved you a lot of time, or you just want to support the project, I would be very grateful if you buy me a cup of coffee.
+If this plugin was useful to you, helped you to deliver your app, saved you a lot of time, or you
+just want to support the project, I would be very grateful if you buy me a cup of coffee.
 
 <a href="https://www.buymeacoffee.com/wetavn" target="_blank" rel="ugc"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee"></a>
 

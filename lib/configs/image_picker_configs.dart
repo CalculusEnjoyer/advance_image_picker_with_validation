@@ -54,6 +54,7 @@ class ImagePickerConfigs {
   factory ImagePickerConfigs() {
     return _singleton;
   }
+
   ImagePickerConfigs._internal();
 
   /// Singleton object for holding the image picker configuration settings.
@@ -238,6 +239,9 @@ class ImagePickerConfigs {
   bool showFlashMode = true;
 
   // UI style settings.
+
+  Widget alertDialog = AlertDialog(semanticLabel: "Error occupied");
+
   /// Default font for the image picker
   String? fontFamily;
 

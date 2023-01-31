@@ -48,7 +48,8 @@ class ImagePicker extends StatefulWidget {
       this.maxCount = 10,
       this.isFullscreenImage = false,
       this.isCaptureFirst = true,
-      this.configs})
+      this.configs,
+      this.validator})
       : super(key: key);
 
   /// Max selecting count
@@ -64,6 +65,8 @@ class ImagePicker extends StatefulWidget {
   /// Default mode for selecting image: capture new image or select
   /// image from album.
   final bool isCaptureFirst;
+
+  final Future<bool> Function(File path)? validator;
 
   @override
   _ImagePickerState createState() => _ImagePickerState();
@@ -683,7 +686,8 @@ class _ImagePickerState extends State<ImagePicker>
           height: 48,
           child: Center(
             child: Text("${_currentScale.toStringAsFixed(1)}x",
-                style: TextStyle(color: Colors.white, fontFamily: _configs.fontFamily)),
+                style: TextStyle(
+                    color: Colors.white, fontFamily: _configs.fontFamily)),
           ),
         ));
   }
@@ -753,10 +757,16 @@ class _ImagePickerState extends State<ImagePicker>
               '$_textSelectedImagesTitle'
               '${_selectedImages.length.toString()}'
               ' / ${widget.maxCount.toString()}',
-              style: TextStyle(color: Colors.white, fontFamily: _configs.fontFamily, fontSize: 14)),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: _configs.fontFamily,
+                  fontSize: 14)),
           if (_configs.textSelectedImagesGuide != '')
             Text(_configs.textSelectedImagesGuide,
-                style: TextStyle(color: Colors.grey, fontFamily: _configs.fontFamily, fontSize: 14))
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontFamily: _configs.fontFamily,
+                    fontSize: 14))
         ],
         _buildReorderableSelectedImageList(context),
         _buildCameraControls(context),
@@ -772,7 +782,11 @@ class _ImagePickerState extends State<ImagePicker>
       {bool isPop = false, bool isCameraMode = false}) {
     if (isCameraMode) {
       return Text(_configs.textCameraTitle,
-          style: TextStyle(color: _configs.appBarTextColor, fontWeight: FontWeight.w600, fontSize: 22, fontFamily: _configs.fontFamily));
+          style: TextStyle(
+              color: _configs.appBarTextColor,
+              fontWeight: FontWeight.w600,
+              fontSize: 22,
+              fontFamily: _configs.fontFamily));
     }
 
     final size = MediaQuery.of(context).size;
@@ -788,8 +802,10 @@ class _ImagePickerState extends State<ImagePicker>
               constraints: BoxConstraints(maxWidth: size.width / 2.5),
               child: Text(_currentAlbum?.name ?? "",
                   overflow: TextOverflow.ellipsis,
-                  style:
-                      TextStyle(color: _configs.appBarTextColor, fontFamily: _configs.fontFamily, fontSize: 16)),
+                  style: TextStyle(
+                      color: _configs.appBarTextColor,
+                      fontFamily: _configs.fontFamily,
+                      fontSize: 16)),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 4),
@@ -834,10 +850,12 @@ class _ImagePickerState extends State<ImagePicker>
             ),
             onPressed: _initCameraController,
             child: Text(_configs.textRequestPermission,
-                style: TextStyle(color: Colors.black, fontFamily: _configs.fontFamily)),
+                style: TextStyle(
+                    color: Colors.black, fontFamily: _configs.fontFamily)),
           ),
           Text(_configs.textRequestCameraPermission,
-              style: TextStyle(color: Colors.black, fontFamily: _configs.fontFamily))
+              style: TextStyle(
+                  color: Colors.black, fontFamily: _configs.fontFamily))
         ],
       ),
     );
@@ -944,10 +962,12 @@ class _ImagePickerState extends State<ImagePicker>
             ),
             onPressed: _initPhotoGallery,
             child: Text(_configs.textRequestPermission,
-                style: TextStyle(color: Colors.black, fontFamily: _configs.fontFamily)),
+                style: TextStyle(
+                    color: Colors.black, fontFamily: _configs.fontFamily)),
           ),
           Text(_configs.textRequestGalleryPermission,
-              style: TextStyle(color: Colors.black, fontFamily: _configs.fontFamily))
+              style: TextStyle(
+                  color: Colors.black, fontFamily: _configs.fontFamily))
         ]));
   }
 
@@ -1032,9 +1052,13 @@ class _ImagePickerState extends State<ImagePicker>
                           height: 80,
                           child: Image.memory(thumbnail, fit: BoxFit.cover)),
                       title: Text(album.name,
-                          style: TextStyle(color: Colors.white, fontFamily: _configs.fontFamily)),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: _configs.fontFamily)),
                       subtitle: Text(album.assetCount.toString(),
-                          style: TextStyle(color: Colors.grey, fontFamily: _configs.fontFamily)),
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontFamily: _configs.fontFamily)),
                       onTap: () async {
                         callback.call(album);
                       }),
@@ -1364,6 +1388,15 @@ class _ImagePickerState extends State<ImagePicker>
                                     file.path,
                                     croppingParams: croppingParams);
 
+                                if (widget.validator != null) {
+                                  bool resultOfValidation =
+                                      await widget.validator!(capturedFile);
+                                  if (resultOfValidation == false) {
+                                    throw ArgumentError(
+                                        "Bad quality of a photo");
+                                  }
+                                }
+
                                 setState(() {
                                   LogUtils.log(
                                       "[_buildCameraControls] update image "
@@ -1374,6 +1407,12 @@ class _ImagePickerState extends State<ImagePicker>
                                 });
                               } on CameraException catch (e) {
                                 LogUtils.log('${e.description}');
+                              } on ArgumentError {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return _configs.alertDialog;
+                                    });
                               }
                             }
                           }
@@ -1470,7 +1509,8 @@ class _ImagePickerState extends State<ImagePicker>
           : Colors.white,
     );
 
-    final textStyle = TextStyle(color: Colors.white, fontFamily: _configs.fontFamily);
+    final textStyle =
+        TextStyle(color: Colors.white, fontFamily: _configs.fontFamily);
     return SizeTransition(
       sizeFactor: _exposureModeControlRowAnimation,
       child: ClipRRect(

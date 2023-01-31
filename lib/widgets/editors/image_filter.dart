@@ -54,6 +54,7 @@ class _ImageFilterState extends State<ImageFilter>
       ListQueue<MapEntry<String, Future<List<int>?> Function()>>();
   int _runningCount = 0;
   late Filter _filter;
+
   // late List<Filter> _filters;
   late Uint8List? _imageBytes;
   late Uint8List? _thumbnailImageBytes;

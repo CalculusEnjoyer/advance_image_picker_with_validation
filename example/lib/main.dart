@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:advance_image_picker/advance_image_picker.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ void main() {
 class MyApp extends StatelessWidget {
   /// Example app constructor.
   const MyApp({final Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class MyApp extends StatelessWidget {
     configs.albumPickerModeEnabled = false;
     configs.appBarTextColor = Colors.white;
     configs.appBarBackgroundColor = Colors.orange;
+
     // Disable select images from album
     // configs.albumPickerModeEnabled = false;
     // Only use front camera for capturing
@@ -168,7 +171,10 @@ class _MyHomePageState extends State<MyHomePage> {
           // Get max 5 images
           final List<ImageObject>? objects = await Navigator.of(context)
               .push(PageRouteBuilder(pageBuilder: (context, animation, __) {
-            return const ImagePicker(maxCount: 5, isFullscreenImage: true);
+            return ImagePicker(
+                maxCount: 5,
+                isFullscreenImage: true,
+                validator: (file) => Future.value(Random().nextBool()));
           }));
 
           if ((objects?.length ?? 0) > 0) {
