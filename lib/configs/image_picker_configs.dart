@@ -238,6 +238,8 @@ class ImagePickerConfigs {
   bool showFlashMode = true;
 
   // UI style settings.
+  /// Default font for the image picker
+  String? fontFamily;
 
   /// Background color of the camera and image picker.
   ///

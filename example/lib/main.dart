@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
     // Setup image picker configs
     final configs = ImagePickerConfigs();
     // AppBar text color
+    configs.albumPickerModeEnabled = false;
     configs.appBarTextColor = Colors.white;
     configs.appBarBackgroundColor = Colors.orange;
     // Disable select images from album
@@ -167,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // Get max 5 images
           final List<ImageObject>? objects = await Navigator.of(context)
               .push(PageRouteBuilder(pageBuilder: (context, animation, __) {
-            return const ImagePicker(maxCount: 5);
+            return const ImagePicker(maxCount: 5, isFullscreenImage: true);
           }));
 
           if ((objects?.length ?? 0) > 0) {

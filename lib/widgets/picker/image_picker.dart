@@ -596,6 +596,7 @@ class _ImagePickerState extends State<ImagePicker>
               child: Row(children: [
                 Text(_configs.textSelectButtonTitle,
                     style: TextStyle(
+                        fontFamily: _configs.fontFamily,
                         color: _selectedImages.isNotEmpty
                             ? ((buttonColor == Colors.white)
                                 ? Colors.black
@@ -680,7 +681,7 @@ class _ImagePickerState extends State<ImagePicker>
           height: 48,
           child: Center(
             child: Text("${_currentScale.toStringAsFixed(1)}x",
-                style: const TextStyle(color: Colors.white)),
+                style: TextStyle(color: Colors.white, fontFamily: _configs.fontFamily)),
           ),
         ));
   }
@@ -750,10 +751,10 @@ class _ImagePickerState extends State<ImagePicker>
               '$_textSelectedImagesTitle'
               '${_selectedImages.length.toString()}'
               ' / ${widget.maxCount.toString()}',
-              style: const TextStyle(color: Colors.white, fontSize: 14)),
+              style: TextStyle(color: Colors.white, fontFamily: _configs.fontFamily, fontSize: 14)),
           if (_configs.textSelectedImagesGuide != '')
             Text(_configs.textSelectedImagesGuide,
-                style: const TextStyle(color: Colors.grey, fontSize: 14))
+                style: TextStyle(color: Colors.grey, fontFamily: _configs.fontFamily, fontSize: 14))
         ],
         _buildReorderableSelectedImageList(context),
         _buildCameraControls(context),
@@ -769,7 +770,7 @@ class _ImagePickerState extends State<ImagePicker>
       {bool isPop = false, bool isCameraMode = false}) {
     if (isCameraMode) {
       return Text(_configs.textCameraTitle,
-          style: TextStyle(color: _configs.appBarTextColor, fontSize: 16));
+          style: TextStyle(color: _configs.appBarTextColor, fontSize: 16, fontFamily: _configs.fontFamily));
     }
 
     final size = MediaQuery.of(context).size;
@@ -786,7 +787,7 @@ class _ImagePickerState extends State<ImagePicker>
               child: Text(_currentAlbum?.name ?? "",
                   overflow: TextOverflow.ellipsis,
                   style:
-                      TextStyle(color: _configs.appBarTextColor, fontSize: 16)),
+                      TextStyle(color: _configs.appBarTextColor, fontFamily: _configs.fontFamily, fontSize: 16)),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 4),
@@ -831,10 +832,10 @@ class _ImagePickerState extends State<ImagePicker>
             ),
             onPressed: _initCameraController,
             child: Text(_configs.textRequestPermission,
-                style: const TextStyle(color: Colors.black)),
+                style: TextStyle(color: Colors.black, fontFamily: _configs.fontFamily)),
           ),
           Text(_configs.textRequestCameraPermission,
-              style: const TextStyle(color: Colors.grey))
+              style: TextStyle(color: Colors.black, fontFamily: _configs.fontFamily))
         ],
       ),
     );
@@ -941,10 +942,10 @@ class _ImagePickerState extends State<ImagePicker>
             ),
             onPressed: _initPhotoGallery,
             child: Text(_configs.textRequestPermission,
-                style: const TextStyle(color: Colors.black)),
+                style: TextStyle(color: Colors.black, fontFamily: _configs.fontFamily)),
           ),
           Text(_configs.textRequestGalleryPermission,
-              style: const TextStyle(color: Colors.grey))
+              style: TextStyle(color: Colors.black, fontFamily: _configs.fontFamily))
         ]));
   }
 
@@ -1029,9 +1030,9 @@ class _ImagePickerState extends State<ImagePicker>
                           height: 80,
                           child: Image.memory(thumbnail, fit: BoxFit.cover)),
                       title: Text(album.name,
-                          style: const TextStyle(color: Colors.white)),
+                          style: TextStyle(color: Colors.white, fontFamily: _configs.fontFamily)),
                       subtitle: Text(album.assetCount.toString(),
-                          style: const TextStyle(color: Colors.grey)),
+                          style: TextStyle(color: Colors.grey, fontFamily: _configs.fontFamily)),
                       onTap: () async {
                         callback.call(album);
                       }),
@@ -1419,11 +1420,13 @@ class _ImagePickerState extends State<ImagePicker>
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
+                    fontFamily: _configs.fontFamily,
                     color: (_mode == PickerMode.Camera)
                         ? Colors.white
                         : Colors.grey)),
             1: Text(_configs.textAlbumTitle,
                 style: TextStyle(
+                    fontFamily: _configs.fontFamily,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: (_mode == PickerMode.Album)
@@ -1465,7 +1468,7 @@ class _ImagePickerState extends State<ImagePicker>
           : Colors.white,
     );
 
-    const textStyle = TextStyle(color: Colors.white);
+    final textStyle = TextStyle(color: Colors.white, fontFamily: _configs.fontFamily);
     return SizeTransition(
       sizeFactor: _exposureModeControlRowAnimation,
       child: ClipRRect(
