@@ -1411,7 +1411,7 @@ class _ImagePickerState extends State<ImagePicker>
                                 showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
-                                      return _configs.alertDialog;
+                                      return _configs.cameraBadQualityAlertDialog;
                                     });
                               }
                             }
