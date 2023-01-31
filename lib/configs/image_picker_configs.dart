@@ -240,7 +240,7 @@ class ImagePickerConfigs {
 
   // UI style settings.
 
-  Widget alertDialog = AlertDialog(semanticLabel: "Error occupied");
+  Widget cameraBadQualityAlertDialog = AlertDialog(semanticLabel: "Error occupied");
 
   /// Default font for the image picker
   String? fontFamily;
