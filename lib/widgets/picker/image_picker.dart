@@ -33,7 +33,7 @@ class PickerMode {
 }
 
 /// Default height of bottom control panel.
-const int kBottomControlPanelHeight = 265;
+const int kBottomControlPanelHeight = 230;
 
 /// Image picker that can use the camera and/or the device photo library.
 ///
@@ -596,6 +596,8 @@ class _ImagePickerState extends State<ImagePicker>
               child: Row(children: [
                 Text(_configs.textSelectButtonTitle,
                     style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
                         fontFamily: _configs.fontFamily,
                         color: _selectedImages.isNotEmpty
                             ? ((buttonColor == Colors.white)
@@ -770,7 +772,7 @@ class _ImagePickerState extends State<ImagePicker>
       {bool isPop = false, bool isCameraMode = false}) {
     if (isCameraMode) {
       return Text(_configs.textCameraTitle,
-          style: TextStyle(color: _configs.appBarTextColor, fontSize: 16, fontFamily: _configs.fontFamily));
+          style: TextStyle(color: _configs.appBarTextColor, fontWeight: FontWeight.w600, fontSize: 22, fontFamily: _configs.fontFamily));
     }
 
     final size = MediaQuery.of(context).size;
@@ -1269,7 +1271,7 @@ class _ImagePickerState extends State<ImagePicker>
 
     return _mode == PickerMode.Camera
         ? Container(
-            height: 60,
+            height: 70,
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1376,8 +1378,8 @@ class _ImagePickerState extends State<ImagePicker>
                             }
                           }
                         : null,
-                    child: Icon(Icons.camera,
-                        size: (64 + (_isCapturing ? (-10) : 0)).toDouble(),
+                    child: Icon(Icons.circle,
+                        size: (80 + (_isCapturing ? (-10) : 0)).toDouble(),
                         color: !isMaxCount ? Colors.white : Colors.grey),
                   ),
                   GestureDetector(
