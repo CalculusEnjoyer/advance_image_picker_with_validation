@@ -239,9 +239,9 @@ class ImagePickerConfigs {
   bool showFlashMode = true;
 
   // UI style settings.
-    AlertDialog cameraBadQualityAlertDialogNO_QUAD = AlertDialog(semanticLabel: "Error occupied");
-    AlertDialog cameraBadQualityAlertDialogBAD_QUAD = AlertDialog(semanticLabel: "Error occupied");
-    AlertDialog cameraBadQualityAlertDialogBLURRY = AlertDialog(semanticLabel: "Error occupied");
+    Widget cameraBadQualityAlertDialogNO_QUAD = AlertDialog(semanticLabel: "Error occupied");
+    Widget cameraBadQualityAlertDialogBAD_QUAD = AlertDialog(semanticLabel: "Error occupied");
+    Widget cameraBadQualityAlertDialogBLURRY = AlertDialog(semanticLabel: "Error occupied");
 
   /// Default font for the image picker
   String? fontFamily;
