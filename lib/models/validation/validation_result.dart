@@ -11,6 +11,7 @@ class ValidationResult {
 }
 
 enum ValidationMessage {
+  GOOD,
   NO_DATA,
   BLURRY,
   NO_QUAD,
