@@ -1408,11 +1408,19 @@ class _ImagePickerState extends State<ImagePicker>
                                 });
                               } on CameraException catch (e) {
                                 LogUtils.log('${e.description}');
-                              } on ArgumentError {
-                                showDialog(
+                              } on ValidationException catch (e) {
+                                await showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
-                                      return _configs.cameraBadQualityAlertDialog;
+                                      switch (e.result.message) {
+                                        case ValidationMessage.BAD_QUAD:
+                                          return _configs.cameraBadQualityAlertDialogBAD_QUAD;
+                                        case ValidationMessage.NO_QUAD:
+                                          return _configs.cameraBadQualityAlertDialogNO_QUAD;
+                                        case ValidationMessage.BLURRY:
+                                          return _configs.cameraBadQualityAlertDialogBLURRY;
+                                      }
+                                      return AlertDialog(semanticLabel: "NO");
                                     });
                               }
                             }
