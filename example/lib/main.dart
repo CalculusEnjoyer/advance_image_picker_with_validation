@@ -173,8 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
               .push(PageRouteBuilder(pageBuilder: (context, animation, __) {
             return ImagePicker(
                 maxCount: 5,
-                isFullscreenImage: true,
-                validator: (file) => Future.value(Random().nextBool()));
+                isFullscreenImage: true);
           }));
 
           if ((objects?.length ?? 0) > 0) {

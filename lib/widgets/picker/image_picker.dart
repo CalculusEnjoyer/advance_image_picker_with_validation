@@ -10,7 +10,9 @@ import 'package:flutter/widgets.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 import '../../configs/image_picker_configs.dart';
+import '../../exception/validation_exception.dart';
 import '../../models/image_object.dart';
+import '../../models/validation/validation_result.dart';
 import '../../utils/image_utils.dart';
 import '../../utils/log_utils.dart';
 import '../common/portrait_mode_mixin.dart';
@@ -66,7 +68,7 @@ class ImagePicker extends StatefulWidget {
   /// image from album.
   final bool isCaptureFirst;
 
-  final Future<bool> Function(File path)? validator;
+  final Future<ValidationResult> Function(File path)? validator;
 
   @override
   _ImagePickerState createState() => _ImagePickerState();
@@ -1389,11 +1391,10 @@ class _ImagePickerState extends State<ImagePicker>
                                     croppingParams: croppingParams);
 
                                 if (widget.validator != null) {
-                                  bool resultOfValidation =
+                                  ValidationResult resultOfValidation =
                                       await widget.validator!(capturedFile);
-                                  if (resultOfValidation == false) {
-                                    throw ArgumentError(
-                                        "Bad quality of a photo");
+                                  if (resultOfValidation.isValid == false) {
+                                    throw ValidationException(resultOfValidation);
                                   }
                                 }
 
